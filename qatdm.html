@@ -1,0 +1,1300 @@
+﻿<html>
+<head>
+
+    <!-- <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"> -->
+
+    <title>Online Examination</title>
+    <meta charset="UTF-8">
+    <link href="css/bootstrap.css" rel="stylesheet">
+    <link href="css/main.css" rel="stylesheet">
+    <link href="css/qaTdm.css" rel="stylesheet">
+
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <link href="css/ie10-viewport-bug-workaround.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="css/sticky-footer-navbar.css" rel="stylesheet">
+
+    <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
+    <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
+    <!-- <script src="js/ie-emulation-modes-warning.js"></script> -->
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <!--  <link rel="stylesheet" href="css/style.css" /> -->
+
+    <link href="css/jqkeyboard.css" rel="stylesheet">
+    <link href="css/SimpleCalculadorajQuery.css" rel="stylesheet">
+    <link href="css/bootstrap-datepicker.css" rel="stylesheet">
+    <link href="css/jquery.alerts.css" rel="stylesheet">
+    <link href="css/alert.css" rel="stylesheet">
+    <link href="css/theme.css" rel="stylesheet">
+
+    <script type="text/javascript">
+        //history.pushState(null, null, 'tdm/qaTdm');
+        window.addEventListener('popstate', function (event) {
+            history.pushState(null, null, '');
+        });
+    </script>
+    <script type="text/javascript">
+
+        document.onkeydown = function () {
+            switch (event.keyCode) {
+                case 116: //F5 button
+                    event.returnValue = false;
+                    event.keyCode = 0;
+                    return false;
+                case 82: //R button
+                    if (event.ctrlKey) {
+                        event.returnValue = false;
+                        event.keyCode = 0;
+                        return false;
+                    }
+            }
+        }
+        var message = "Function Disabled!";
+
+        function clickIE4() {
+            if (event.button == 2) {
+                //alert(message);
+                return false;
+            }
+        }
+
+        function clickNS4(e) {
+            if (document.layers || document.getElementById && !document.all) {
+                if (e.which == 2 || e.which == 3) {
+                    //alert(message);
+                    return false;
+                }
+            }
+        }
+
+        if (document.layers) {
+            document.captureEvents(Event.MOUSEDOWN);
+            document.onmousedown = clickNS4;
+        }
+        else if (document.all && !document.getElementById) {
+            document.onmousedown = clickIE4;
+        }
+
+        document.oncontextmenu = new Function("return false")
+
+    </script>
+    <style>
+        .btn_viewd_section a.btn {
+        }
+
+        .examine_detail {
+        }
+
+            .examine_detail label {
+                color: #4B70DC;
+                padding: 1px 0;
+                font-weight: normal;
+                margin-bottom: 2px;
+                font-family: verdana;
+            }
+
+                .examine_detail label.bld_txt {
+                    font-weight: bold;
+                    font-size: 13px;
+                    font-family: arial;
+                    line-height: 17px;
+                }
+
+        #summaryBody table tbody tr:nth-child(3) {
+            font-size: :15px;
+            font-weight: bold;
+        }
+
+        .margin-top {
+            margin-top: 48px;
+        }
+
+        .magnify {
+            position: relative;
+            cursor: none;
+        }
+
+        .magnify-large {
+            position: absolute;
+            display: none;
+            width: 253px;
+            height: 253px;
+            -webkit-box-shadow: 0 0 0 7px rgba(255, 255, 255, 0.55), 0 0 7px 7px rgba(0, 0, 0, 0.25), inset 0 0 40px 2px rgba(0, 0, 0, 0.25);
+            -moz-box-shadow: 0 0 0 7px rgba(255, 255, 255, 0.55), 0 0 7px 7px rgba(0, 0, 0, 0.25), inset 0 0 40px 2px rgba(0, 0, 0, 0.25);
+            box-shadow: 0 0 0 7px rgba(255, 255, 255, 0.55), 0 0 7px 7px rgba(0, 0, 0, 0.25), inset 0 0 40px 2px rgba(0, 0, 0, 0.25);
+            -webkit-border-radius: 100%;
+            -moz-border-radius: 100%;
+            border-radius: 100%;
+        }
+
+        .showUnAnsTooltip {
+            color: #fff;
+            text-decoration: none;
+        }
+
+            .showUnAnsTooltip:hover {
+                position: relative;
+            }
+
+            .showUnAnsTooltip[title]:hover:after {
+                content: "Tool tip hover text";
+                padding: 14px 12px;
+                color: #494a4a;
+                background: #efefef;
+                position: absolute;
+                left: 0;
+                right: auto;
+                top: 100%;
+                white-space: nowrap;
+                z-index: 20px;
+                border: #b9b9b9 solid 1px;
+                font-size: 16px;
+            }
+
+
+        /*.showUnAnsTooltip[title]:hover:before{ content:'';
+        display:block;
+        width:0;
+        height:0;
+        position:absolute;
+
+        border-top: 8px solid transparent;
+        border-bottom: 8px solid transparent;
+        border-right:8px solid black;
+        left:-6px;
+
+        top:15px;}*/
+    </style>
+
+</head>
+<!--  onkeydown="return (event.keyCode == 154)"  -->
+<body onload="loadMasterQuestion();" ondragstart="return false;" ondrop="return false;" onselectstart="return false">
+    <div class="div-1" id="mainDiv">
+
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <form action="#" method="POST" name="form1" id="form1">
+
+                <input type="hidden" name="_csrf" value="93c41d5e-c54a-4b80-b2ee-5e30b0f9eca0">
+                <div class="panel panel-default" style="margin-bottom: 5px;">
+                    <div class="panel-body modal_head_part row_bg">
+                        <div class="col-xs-1"><img alt="" class="logo img-circle" src="Images/logo-icon.jpg" style="width:35px; margin-left: 12px;"></div>
+                        <div class="col-xs-2"><div class="demoexam_logo">JUST A MOCK PAPER</div></div>
+                        <div class="col-xs-2 student_name bold_txt">Mock Student</div>
+
+                        <div class="form-group col-sm-2">
+                            <div class="col-xs-4 roll_num bold_txt">अनुक्रमांक/ Roll No:</div>
+                            <div class="col-xs-5 normal_txt" style="MARGIN-LEFT: 5PX;"> MOCK00001</div>
+                        </div>
+
+
+                        <div class="form-group col-sm-2">
+                            <div class="col-xs-3 date_txt bold_txt"> दिनांक / Date:</div>
+                            <div class="col-xs-6 normal_txt" id="showCurrentDate4"></div>
+                        </div>
+
+                        <div class="form-group col-sm-3 pull-right res_1024">
+                            <div class="col-xs-7 timer_txt"> बचा हुआ समय / <br />Remaining Time:</div>
+                            <div class="col-xs-3"><label class="time_btn" id="timerDurationLeft">05:00</label></div>
+                        </div>
+
+                        <!--        <div class="col-xs-1" style="margin-top: 15px;"></div> -->
+                        <div class="col-xs-1 resource_btn pull-right">
+                            <div class="btn-group">
+                                <!-- <button type = "button" class = "btn btn-res  dropdown-toggle" data-toggle = "dropdown"><b>Resources</b><span class = "caret"></span></button> -->
+
+                                <ul class="dropdown-menu top_right_drop_menu" role="menu" style="right:0 !important; left:inherit;">
+                                    <!-- <li><a href = "#fontChose"  data-toggle="modal">Fonts <span class="glyphicon glyphicon-text-size pull-right" aria-hidden="true"></span></a></li> -->
+                                    <!--  <li class = "divider"></li> -->
+
+                                    <li><a href="#calChose" data-toggle="modal" onclick="captureEvent(12);">Calculator <span class="glyphicon glyphicon-calendar pull-right" aria-hidden="true"></span></a></li>
+
+                                    <li><a href="#logChose" data-toggle="modal" onclick="captureEvent(13);">Log Table <span class="glyphicon glyphicon-picture pull-right" aria-hidden="true"></span></a></li>
+
+                                    <li><a href="#preChose" data-toggle="modal" onclick="captureEvent(15);">Periodic Table <span class="glyphicon glyphicon-header pull-right" aria-hidden="true"></span></a></li>
+
+                                    <li style="border-bottom:0px !important;"><a href="#annuChose" data-toggle="modal" onclick="captureEvent(14);">Annuity Table <span class="glyphicon glyphicon-signal pull-right" aria-hidden="true"></span></a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <!--        <div class="col-xs-1" style="margin-top: 8px;"><button type="button" class="btn btn-res">Score: 39 </button></div> -->
+
+                    </div>
+                </div>
+
+
+                <!-- ********************************************** -->
+                <div class="col-xs-12 col-sm-9 col-md-9 col-lg-9">
+                    <div class="panel panel-default">
+                        <div class="panel-body" style="height: 554px;  background-color: #ececec; border: #b3b0b0 solid 1px; padding: 0px;">
+
+                            <div class="bs-example" style="border: #dcd6d6 solid 1px; background-color: #fff;">
+
+                                <ul class="nav nav-tabs nav-justified" id="tabId"><li id="secTab68" class="active"><a data-toggle="tab" href="#68" onclick=""><b style="color:#ffffff;"> जांच परीक्षा / Mock Exam</b></a></li></ul>
+
+                                <div class="tab-content" id="tabContentId">
+                                    <div id="questionDiv" class="tab-pane fade in active" style="height: 416px; overflow: auto;">
+                                        <div id="grpTextTable">सभी सवालों के पांच विकल्प हैं। सही उत्तर को इंगित करने के लिए एक बॉक्स का चयन करें / All Questions are followed by five options. Select one box to indicate the correct answer</div>
+                                        <table id="questTable">
+                                            <!--<div id="questionDiv" class="tab-pane fade in active" style="height: 416px; overflow: auto;">
+                                                <div id="grpTextTable">सभी प्रश्न के चार विक्ल्प  दिए गये है किसी एक को चुने । / All questions are followed by four options. Select one box to indicate the correct answer.</div><table id="questTable">
+                                                    <tbody>
+                                                        <tr>
+                                                            <td valign="top">
+                                                                <div class="q_div"><div class="q_index"><b>प्रश्न 1 : &nbsp;&nbsp;<br>Question:</b></div><div class="q_text"><b>एक्सेस में एक नया डेटाबेस खोलने के लिए<span class="optionBreak"></span>To open a new database in Access</b></div></div>
+                                                                <div class='q_index'><b>उत्तर / Answers:</b></div>
+                                                            </td>
+                                                        </tr>
+                                                        <tr><td><label class="light_black"><div class="button_bg" onclick="makeGreen('div3151');" id="div3151"><div style="padding-top:3px; display: inline-block;"><input type="radio" value="3151" name="ansOption" id="3151"> <b>A)</b></div><div class="option_wrap"> कंट्रोल + N<span class="optionBreak"></span>Ctrl+N</div><input type="hidden" name="optionId" value="3151"></div></label></td></tr>
+                                                        <tr><td><label class="light_black"><div class="button_bg" onclick="makeGreen('div3152');" id="div3152"><div style="padding-top:3px; display: inline-block;"><input type="radio" value="3152" name="ansOption" id="3152"> <b>B)</b></div><div class="option_wrap">  कंट्रोल + नया<span class="optionBreak"></span>Ctrl+New</div><input type="hidden" name="optionId" value="3152"></div></label></td></tr>
+                                                        <tr><td><label class="light_black"><div class="button_bg" onclick="makeGreen('div3153');" id="div3153"><div style="padding-top:3px; display: inline-block;"><input type="radio" value="3153" name="ansOption" id="3153"> <b>C)</b></div><div class="option_wrap">  कंट्रोल + O<span class="optionBreak"></span>Ctrl+O</div><input type="hidden" name="optionId" value="3153"></div></label></td></tr>
+                                                        <tr><td><label class="light_black"><div class="button_bg" onclick="makeGreen('div3154');" id="div3154"><div style="padding-top:3px; display: inline-block;"><input type="radio" value="3154" name="ansOption" id="3154"> <b>D)</b></div><div class="option_wrap"> कंट्रोल+खुला <span class="optionBreak"></span>Ctrl+Open</div><input type="hidden" name="optionId" value="3154"></div></label></td></tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>-->
+                                        </table>
+                                    </div>
+
+                                    <div class="btn center-block bottomButtonsWraper" style="margin-top: 2px; border-top: rgba(204, 204, 204, 0.57) solid 2px;">
+                                        <div id="markforCheck" style="width:3%;">
+                                            <tr>
+                                                <td>
+                                                    <!--<p><b><input type="checkbox" class="check_mark_visit" value="" id="markForRevisit" name="markForRevisit" onclick="changeCheckboxVal(this,0,1)"><label for="markForRevisit" class="mark_visit">समीक्षा के लिए चिन्हित करे <br> Mark For Review</label></b></p>-->
+                                                    <p><b><input type="checkbox" class="check_mark_visit" value="" id="markForRevisit" name="markForRevisit" onclick="markForVisitOption(this,0,1);"><label for="markForRevisit" class="mark_visit">समीक्षा के लिए चिन्हित करे <br> Mark For Review</label></b></p>
+                                                    
+                                                    
+                                                </td>
+                                            </tr>
+                                        </div>
+                                        <div class="btn-group left_part_buttons">
+                                            <!--<button type="button" class="btn btn-primary" onclick="saveAndPrevious();" style="width:175px;"><span class="h_text_2">सुरक्षित और पिछला</span> <span class="glyphicon glyphicon-backward" aria-hidden="true"></span> Save &amp; Previous</button>-->
+                                            <button type="button" class="btn btn-default" onclick="ClearOptionByButton();"><span class="h_text_1"><span class="glyphicon glyphicon-erase" aria-hidden="true"></span> खाली</span>Clear </button>
+                                            <button type="button" class="btn btn-danger" onclick="skipQuestions();"><span class="h_text_1 white-text">छोड़ें</span>Skip</button>
+                                            <button type="button" class="btn btn-success" onclick="saveQuestionAnswer();" style="width:175px;"><span class="h_text_2">सुरक्षित और अगला</span>Save &amp; Next <span class="glyphicon glyphicon-forward" aria-hidden="true"></span></button>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- *************************************************** -->
+                <div class="col-xs-12 col-sm-3 col-md-3 col-lg-3">
+                    <div class="panel panel-default" style=" margin-bottom: 23px; border: #b3b0b0 solid 1px; border-radius:0px;">
+                        <div class="panel-heading" style="color: #060606; padding: 0px;">
+                            <!-- <div class="panel-body" style="padding: 5px; background-color: #ececec; ">
+
+                                    <div class="form-group">
+                                        <div class="col-xs-6" style="color:#0B63AF;"><b>Lapsed Time:</b></div>
+                                        <div class="col-xs-6"><label style="color:  red;"  id="timerDuration"></label></div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="col-xs-6" style="color:#0B63AF;"><b>Remaining Time:</b></div>
+                                        <div class="col-xs-6"><label style="color:  red;" id="timerDurationLeft"></label></div>
+                                    </div>
+
+                            </div> -->
+                        </div>
+
+                        <div class="panel panel-default" style=" margin-bottom: 2px;">
+                            <div class="panel-heading" id="secName" name="secName" style="color: #fff; background: #2AC6A2 !important; border: 0px; border-radius:0px; padding: 10px 0;"><center><b id="secName68">जांच परीक्षा / Mock Exam</b></center></div>
+                            <div class="panel-body btn_viewd_section" style="padding: 0px; min-height: 340px;  background-color: #ececec; ">
+                                <div class="panel panel-default" style="margin-bottom:4px;">
+                                    <div class="panel-body button_wrapper" style="height:265px;" id="questPrevDiv" name="questPrevDiv"><button type="button" class="btn btn-circle btn-default" onclick="loadQuestfromPreview(this.id,this.value);" id="1" value="1076">1</button><button type="button" class="btn btn-circle btn-default" onclick="loadQuestfromPreview(this.id,this.value);" id="2" value="1077">2</button><button type="button" class="btn btn-circle btn-default" onclick="loadQuestfromPreview(this.id,this.value);" id="3" value="1078">3</button><button type="button" class="btn btn-circle btn-default" onclick="loadQuestfromPreview(this.id,this.value);" id="4" value="1079">4</button><button type="button" class="btn btn-circle btn-default" onclick="loadQuestfromPreview(this.id,this.value);" id="5" value="1080">5</button><button type="button" class="btn btn-circle btn-default" onclick="loadQuestfromPreview(this.id,this.value);" id="6" value="1081">6</button><button type="button" class="btn btn-circle btn-default" onclick="loadQuestfromPreview(this.id,this.value);" id="7" value="1082">7</button><button type="button" class="btn btn-circle btn-default" onclick="loadQuestfromPreview(this.id,this.value);" id="8" value="1083">8</button><button type="button" class="btn btn-circle btn-default" onclick="loadQuestfromPreview(this.id,this.value);" id="9" value="1084">9</button><button type="button" class="btn btn-circle btn-default" onclick="loadQuestfromPreview(this.id,this.value);" id="10" value="1085">10</button><button type="button" class="btn btn-circle btn-default" onclick="loadQuestfromPreview(this.id,this.value);" id="11" value="1086">11</button><button type="button" class="btn btn-circle btn-default" onclick="loadQuestfromPreview(this.id,this.value);" id="12" value="1087">12</button><button type="button" class="btn btn-circle btn-default" onclick="loadQuestfromPreview(this.id,this.value);" id="13" value="1088">13</button><button type="button" class="btn btn-circle btn-default" onclick="loadQuestfromPreview(this.id,this.value);" id="14" value="1089">14</button><button type="button" class="btn btn-circle btn-default" onclick="loadQuestfromPreview(this.id,this.value);" id="15" value="1090">15</button><button type="button" class="btn btn-circle btn-default" onclick="loadQuestfromPreview(this.id,this.value);" id="16" value="1091">16</button><button type="button" class="btn btn-circle btn-default" onclick="loadQuestfromPreview(this.id,this.value);" id="17" value="1092">17</button><button type="button" class="btn btn-circle btn-default" onclick="loadQuestfromPreview(this.id,this.value);" id="18" value="1093">18</button><button type="button" class="btn btn-circle btn-default" onclick="loadQuestfromPreview(this.id,this.value);" id="19" value="1094">19</button><button type="button" class="btn btn-circle btn-default" onclick="loadQuestfromPreview(this.id,this.value);" id="20" value="1095">20</button><!-- <button type="button" class="btn btn-circle btn-default" onclick="loadQuestfromPreview(this.id,this.value);" id="21" value="1096">21</button><button type="button" class="btn btn-circle btn-default" onclick="loadQuestfromPreview(this.id,this.value);" id="22" value="1097">22</button><button type="button" class="btn btn-circle btn-default" onclick="loadQuestfromPreview(this.id,this.value);" id="23" value="1098">23</button><button type="button" class="btn btn-circle btn-default" onclick="loadQuestfromPreview(this.id,this.value);" id="24" value="1099">24</button><button type="button" class="btn btn-circle btn-default" onclick="loadQuestfromPreview(this.id,this.value);" id="25" value="1100">25</button><button type="button" class="btn btn-circle btn-default" onclick="loadQuestfromPreview(this.id,this.value);" id="26" value="1101">26</button><button type="button" class="btn btn-circle btn-default" onclick="loadQuestfromPreview(this.id,this.value);" id="27" value="1102">27</button><button type="button" class="btn btn-circle btn-default" onclick="loadQuestfromPreview(this.id,this.value);" id="28" value="1103">28</button><button type="button" class="btn btn-circle btn-default" onclick="loadQuestfromPreview(this.id,this.value);" id="29" value="1104">29</button><button type="button" class="btn btn-circle btn-default" onclick="loadQuestfromPreview(this.id,this.value);" id="30" value="1105">30</button><button type="button" class="btn btn-circle btn-default" onclick="loadQuestfromPreview(this.id,this.value);" id="31" value="1106">31</button><button type="button" class="btn btn-circle btn-default" onclick="loadQuestfromPreview(this.id,this.value);" id="32" value="1107">32</button><button type="button" class="btn btn-circle btn-default" onclick="loadQuestfromPreview(this.id,this.value);" id="33" value="1108">33</button><button type="button" class="btn btn-circle btn-default" onclick="loadQuestfromPreview(this.id,this.value);" id="34" value="1109">34</button><button type="button" class="btn btn-circle btn-default" onclick="loadQuestfromPreview(this.id,this.value);" id="35" value="1110">35</button><button type="button" class="btn btn-circle btn-default" onclick="loadQuestfromPreview(this.id,this.value);" id="36" value="1111">36</button><button type="button" class="btn btn-circle btn-default" onclick="loadQuestfromPreview(this.id,this.value);" id="37" value="1112">37</button><button type="button" class="btn btn-circle btn-default" onclick="loadQuestfromPreview(this.id,this.value);" id="38" value="1113">38</button><button type="button" class="btn btn-circle btn-default" onclick="loadQuestfromPreview(this.id,this.value);" id="39" value="1114">39</button><button type="button" class="btn btn-circle btn-default" onclick="loadQuestfromPreview(this.id,this.value);" id="40" value="1115">40</button><button type="button" class="btn btn-circle btn-default" onclick="loadQuestfromPreview(this.id,this.value);" id="41" value="1116">41</button><button type="button" class="btn btn-circle btn-default" onclick="loadQuestfromPreview(this.id,this.value);" id="42" value="1117">42</button><button type="button" class="btn btn-circle btn-default" onclick="loadQuestfromPreview(this.id,this.value);" id="43" value="1118">43</button><button type="button" class="btn btn-circle btn-default" onclick="loadQuestfromPreview(this.id,this.value);" id="44" value="1119">44</button><button type="button" class="btn btn-circle btn-default" onclick="loadQuestfromPreview(this.id,this.value);" id="45" value="1120">45</button><button type="button" class="btn btn-circle btn-default" onclick="loadQuestfromPreview(this.id,this.value);" id="46" value="1121">46</button><button type="button" class="btn btn-circle btn-default" onclick="loadQuestfromPreview(this.id,this.value);" id="47" value="1122">47</button><button type="button" class="btn btn-circle btn-default" onclick="loadQuestfromPreview(this.id,this.value);" id="48" value="1123">48</button><button type="button" class="btn btn-circle btn-default" onclick="loadQuestfromPreview(this.id,this.value);" id="49" value="1124">49</button><button type="button" class="btn btn-circle btn-default" onclick="loadQuestfromPreview(this.id,this.value);" id="50" value="1125">50</button><button type="button" class="btn btn-circle btn-default" onclick="loadQuestfromPreview(this.id,this.value);" id="51" value="1126">51</button><button type="button" class="btn btn-circle btn-default" onclick="loadQuestfromPreview(this.id,this.value);" id="52" value="1127">52</button><button type="button" class="btn btn-circle btn-default" onclick="loadQuestfromPreview(this.id,this.value);" id="53" value="1128">53</button><button type="button" class="btn btn-circle btn-default" onclick="loadQuestfromPreview(this.id,this.value);" id="54" value="1129">54</button><button type="button" class="btn btn-circle btn-default" onclick="loadQuestfromPreview(this.id,this.value);" id="55" value="1130">55</button><button type="button" class="btn btn-circle btn-default" onclick="loadQuestfromPreview(this.id,this.value);" id="56" value="1131">56</button><button type="button" class="btn btn-circle btn-default" onclick="loadQuestfromPreview(this.id,this.value);" id="57" value="1132">57</button><button type="button" class="btn btn-circle btn-default" onclick="loadQuestfromPreview(this.id,this.value);" id="58" value="1133">58</button><button type="button" class="btn btn-circle btn-default" onclick="loadQuestfromPreview(this.id,this.value);" id="59" value="1134">59</button><button type="button" class="btn btn-circle btn-default" onclick="loadQuestfromPreview(this.id,this.value);" id="60" value="1135">60</button><button type="button" class="btn btn-circle btn-default" onclick="loadQuestfromPreview(this.id,this.value);" id="61" value="1136">61</button><button type="button" class="btn btn-circle btn-default" onclick="loadQuestfromPreview(this.id,this.value);" id="62" value="1137">62</button><button type="button" class="btn btn-circle btn-default" onclick="loadQuestfromPreview(this.id,this.value);" id="63" value="1138">63</button><button type="button" class="btn btn-circle btn-default" onclick="loadQuestfromPreview(this.id,this.value);" id="64" value="1139">64</button><button type="button" class="btn btn-circle btn-default" onclick="loadQuestfromPreview(this.id,this.value);" id="65" value="1140">65</button><button type="button" class="btn btn-circle btn-default" onclick="loadQuestfromPreview(this.id,this.value);" id="66" value="1141">66</button><button type="button" class="btn btn-circle btn-default" onclick="loadQuestfromPreview(this.id,this.value);" id="67" value="1142">67</button><button type="button" class="btn btn-circle btn-default" onclick="loadQuestfromPreview(this.id,this.value);" id="68" value="1143">68</button><button type="button" class="btn btn-circle btn-default" onclick="loadQuestfromPreview(this.id,this.value);" id="69" value="1144">69</button><button type="button" class="btn btn-circle btn-default" onclick="loadQuestfromPreview(this.id,this.value);" id="70" value="1145">70</button><button type="button" class="btn btn-circle btn-default" onclick="loadQuestfromPreview(this.id,this.value);" id="71" value="1146">71</button><button type="button" class="btn btn-circle btn-default" onclick="loadQuestfromPreview(this.id,this.value);" id="72" value="1147">72</button><button type="button" class="btn btn-circle btn-default" onclick="loadQuestfromPreview(this.id,this.value);" id="73" value="1148">73</button><button type="button" class="btn btn-circle btn-default" onclick="loadQuestfromPreview(this.id,this.value);" id="74" value="1149">74</button><button type="button" class="btn btn-circle btn-default" onclick="loadQuestfromPreview(this.id,this.value);" id="75" value="1150">75</button><button type="button" class="btn btn-circle btn-default" onclick="loadQuestfromPreview(this.id,this.value);" id="76" value="1151">76</button><button type="button" class="btn btn-circle btn-default" onclick="loadQuestfromPreview(this.id,this.value);" id="77" value="1152">77</button><button type="button" class="btn btn-circle btn-default" onclick="loadQuestfromPreview(this.id,this.value);" id="78" value="1153">78</button><button type="button" class="btn btn-circle btn-default" onclick="loadQuestfromPreview(this.id,this.value);" id="79" value="1154">79</button><button type="button" class="btn btn-circle btn-default" onclick="loadQuestfromPreview(this.id,this.value);" id="80" value="1155">80</button><button type="button" class="btn btn-circle btn-default" onclick="loadQuestfromPreview(this.id,this.value);" id="81" value="1156">81</button><button type="button" class="btn btn-circle btn-default" onclick="loadQuestfromPreview(this.id,this.value);" id="82" value="1157">82</button><button type="button" class="btn btn-circle btn-default" onclick="loadQuestfromPreview(this.id,this.value);" id="83" value="1158">83</button><button type="button" class="btn btn-circle btn-default" onclick="loadQuestfromPreview(this.id,this.value);" id="84" value="1159">84</button><button type="button" class="btn btn-circle btn-default" onclick="loadQuestfromPreview(this.id,this.value);" id="85" value="1160">85</button><button type="button" class="btn btn-circle btn-default" onclick="loadQuestfromPreview(this.id,this.value);" id="86" value="1161">86</button><button type="button" class="btn btn-circle btn-default" onclick="loadQuestfromPreview(this.id,this.value);" id="87" value="1162">87</button><button type="button" class="btn btn-circle btn-default" onclick="loadQuestfromPreview(this.id,this.value);" id="88" value="1163">88</button><button type="button" class="btn btn-circle btn-default" onclick="loadQuestfromPreview(this.id,this.value);" id="89" value="1164">89</button><button type="button" class="btn btn-circle btn-default" onclick="loadQuestfromPreview(this.id,this.value);" id="90" value="1165">90</button><button type="button" class="btn btn-circle btn-default" onclick="loadQuestfromPreview(this.id,this.value);" id="91" value="1166">91</button><button type="button" class="btn btn-circle btn-default" onclick="loadQuestfromPreview(this.id,this.value);" id="92" value="1167">92</button><button type="button" class="btn btn-circle btn-default" onclick="loadQuestfromPreview(this.id,this.value);" id="93" value="1168">93</button><button type="button" class="btn btn-circle btn-default" onclick="loadQuestfromPreview(this.id,this.value);" id="94" value="1169">94</button><button type="button" class="btn btn-circle btn-default" onclick="loadQuestfromPreview(this.id,this.value);" id="95" value="1170">95</button><button type="button" class="btn btn-circle btn-default" onclick="loadQuestfromPreview(this.id,this.value);" id="96" value="1171">96</button><button type="button" class="btn btn-circle btn-default" onclick="loadQuestfromPreview(this.id,this.value);" id="97" value="1172">97</button><button type="button" class="btn btn-circle btn-default" onclick="loadQuestfromPreview(this.id,this.value);" id="98" value="1173">98</button><button type="button" class="btn btn-circle btn-default" onclick="loadQuestfromPreview(this.id,this.value);" id="99" value="1174">99</button><button type="button" class="btn btn-circle btn-default" onclick="loadQuestfromPreview(this.id,this.value);" id="100" value="1175">100</button> --></div>
+                                </div>
+
+                                <div class="button_wrap-2">
+                                    <div class="outer_row"> <a class="btn btn-circle btn-default" id="notViewedAns">10</a> <div class="crcle_txt"><span class="hinditext">प्रश्नों के उत्तर दिए जाने है</span> Questions to be answered</div></div>
+                                    <div class="outer_row"> <a class="btn btn-circle btn-success" id="answeredAns">0</a> <div class="crcle_txt"><span class="hinditext">उत्तर दिया</span> Answered</div></div>
+                                    <div class="outer_row"> <a class="btn btn-circle btn-danger" id="unansweredAns">0</a> <div class="crcle_txt"><span class="hinditext">उत्तर नहीं दिया</span> Unanswered</div></div>
+                                    <!--<div class="outer_row"> <a class="btn btn-circle btn-primary" id="unansweredAndMarkedAns">0</a> <div class="crcle_txt"><span class="hinditext">उत्तर नहीं दिया और समीक्षा के लिए चिह्नित किया</span>Unanswered &amp; Marked For Review</div></div>-->
+                                    <div class="outer_row"> <a class="btn btn-circle btn-warning" id="answeredAndMarkedAns">0</a> <div class="crcle_txt"><span class="hinditext">उत्तर दिया और पुनर्विचार के लिए चिह्नित किया</span>Answered &amp; Marked For Review</div></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="panel panel-default buttons_area" style="margin-bottom: 0;">
+                            <div class="panel-body" style="padding:0px;">
+                                <div class="row">
+                                    <div class="form-group">
+                                        <div class="col-xs-12 right_buttons_area">
+                                            <div class="col-xs-4"><a href="#instructionModal" role="button" class="btn btn-green col-xs-12" data-toggle="modal" onclick=""><span class="h_text">निर्देश</span> Instruction </a></div>
+                                            <div class="col-xs-4"><a href="#profileModal" role="button" class="btn btn-green col-xs-12" data-toggle="modal" onclick=""><span class="h_text">प्रोफाइल</span>Profile</a></div>
+                                           
+                                            <!--<div class="col-xs-4"><a style="" href="#BioCallModal" id="shortRelief" role="button" class="btn btn-green col-xs-12" data-toggle="modal" onclick=""><span class="h_text">अल्पविराम</span>Short Relief</a></div>-->
+                                            
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="form-group">
+                                        <div class="col-xs-12 right_buttons_area">
+                                            <div class="col-xs-4"><a href="#summaryModel" onclick="showSummaryDetails('summary');" role="button" class="btn btn-green col-xs-12" data-toggle="modal" onclick=""><span class="h_text">सारांश</span>Summary</a></div>
+                                            <div class="col-xs-4"><a href="#paperModel" role="button" class="btn btn-green col-xs-12" data-toggle="modal" onclick=""><span class="h_text">पेपर</span>Paper</a></div>
+
+                                            <div class="col-xs-4"><a href="#submitModal" onclick="showSummaryDetails('submit');" role="button" class="btn btn-green col-xs-12" data-toggle="modal" onclick=""><span class="h_text">मॉक जमा करें</span>Submit Mock</a></div>
+                                            <!--  <div class="col-xs-4"><a onclick="showResult();" role="button" class="btn btn-green col-xs-12" data-toggle="modal" onclick=""><span class="h_text">जमा करना</span>Submit</a></div>    -->
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- ***********************************model*************************** -->
+                <!-- ***********************************model*************************** -->
+                <!-- Modal HTML -->
+                <div id="calChose" class="modal fade">
+                    <div class="modal-dialog" style="width: 300px; margin-right: 60px; margin-top: 80px;">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                                <h4 class="modal-title" style="color: #fff;"> कैलकुलेटर / Calculator</h4>
+                            </div>
+                            <div class="modal-body" style="max-width: 900px;">
+                                <div id="micalc"><div class="panel panel-primary btn-block calculadoraBase  mtop"><div class="panel-body"><div class="col-md-12"> <input type="text" class="form-control txtr" id="micalctxtResultado" value="0"><div class="row" id="micalcbtns"><div class="col-md-3 col-xs-3 mbottom"><input type="button" class="micalctcl btn3d btn-lg btn-block btn btn-primary" value="7"></div><div class="col-md-3 col-xs-3 mbottom"><input type="button" class="micalctcl btn3d btn-lg btn-block btn btn-primary" value="8"></div><div class="col-md-3 col-xs-3 mbottom"><input type="button" class="micalctcl btn3d btn-lg btn-block btn btn-primary" value="9"></div><div class="col-md-3 col-xs-3 mbottom"><input type="button" class="micalctcl btn3d btn-lg btn-block btn btn-success" value="+"></div><div class="col-md-3 col-xs-3 mbottom"><input type="button" class="micalctcl btn3d btn-lg btn-block btn btn-primary" value="4"></div><div class="col-md-3 col-xs-3 mbottom"><input type="button" class="micalctcl btn3d btn-lg btn-block btn btn-primary" value="5"></div><div class="col-md-3 col-xs-3 mbottom"><input type="button" class="micalctcl btn3d btn-lg btn-block btn btn-primary" value="6"></div><div class="col-md-3 col-xs-3 mbottom"><input type="button" class="micalctcl btn3d btn-lg btn-block btn btn-success" value="-"></div><div class="col-md-3 col-xs-3 mbottom"><input type="button" class="micalctcl btn3d btn-lg btn-block btn btn-primary" value="3"></div><div class="col-md-3 col-xs-3 mbottom"><input type="button" class="micalctcl btn3d btn-lg btn-block btn btn-primary" value="2"></div><div class="col-md-3 col-xs-3 mbottom"><input type="button" class="micalctcl btn3d btn-lg btn-block btn btn-primary" value="1"></div><div class="col-md-3 col-xs-3 mbottom"><input type="button" class="micalctcl btn3d btn-lg btn-block btn btn-success" value="*"></div><div class="col-md-3 col-xs-3 mbottom"><input type="button" class="micalctcl btn3d btn-lg btn-block btn btn-primary" value="0"></div><div class="col-md-3 col-xs-3 mbottom"><input type="button" class="micalctcl btn3d btn-lg btn-block btn btn-primary" value="."></div><div class="col-md-3 col-xs-3 mbottom"><input type="button" class="micalctcl btn3d btn-lg btn-block btn btn-warning" value="="></div><div class="col-md-3 col-xs-3 mbottom"><input type="button" class="micalctcl btn3d btn-lg btn-block btn btn-success" value="/"></div></div><input type="button" id="micalcBorrar" class="btn3d btn btn-danger btn-lg btn-block" value="Clear"></div></div> </div></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Modal HTML -->
+                <div id="logChose" class="modal fade">
+                    <div class="modal-dialog modal-lg">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                                <h4 class="modal-title">Log Table</h4>
+                            </div>
+                            <div class="modal-body" style="max-width: 900px; height:550px;">
+                                <div class="magnify"><img data-toggle="magnify" src="Images/dataImg/logTable.jpg" style="width: 860px;height: 500px;"><div class="magnify-large" style="background: url(&quot;Images/dataImg/logTable.jpg&quot;) no-repeat;"></div></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Modal HTML -->
+                <div id="preChose" class="modal fade">
+                    <div class="modal-dialog modal-lg">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                                <h4 class="modal-title">Periodic Table</h4>
+                            </div>
+                            <div class="modal-body" style="max-width: 900px; height:550px;">
+                                <div class="magnify"><img data-toggle="magnify" src="Images/dataImg/periodic.png" style="width: 860px;height: 500px;"><div class="magnify-large" style="background: url(&quot;Images/dataImg/periodic.png&quot;) no-repeat;"></div></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Modal HTML -->
+                <div id="annuChose" class="modal fade">
+                    <div class="modal-dialog modal-lg">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                                <h4 class="modal-title">Annuity Table</h4>
+                            </div>
+                            <div class="modal-body" style="max-width: 900px; height:550px">
+                                <div class="magnify"><img data-toggle="magnify" src="Images/dataImg/annuity.PNG" style="width: 860px;height: 500px;"><div class="magnify-large" style="background: url(&quot;Images/dataImg/annuity.PNG&quot;) no-repeat;"></div></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Modal HTML -->
+                <div id="instructionModal" class="modal fade">
+                    <div class="modal-dialog modal-lg margin-top" style="width:73%;">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                                <h4 class="modal-title"><label style="color:#fff;">  JUST A MOCK PAPER</label></h4>
+                            </div>
+                            <div class="modal-body">
+                                <div class="panel panel-default" style="margin-bottom: 5px;">
+
+                                    <div class="panel-body modal_head_part">
+                                        <div class="col-xs-1"><img alt="" class="logo img-circle" src="Images/logo-icon.jpg"></div>
+                                        <div class="col-xs-2 bold_head">Mock Student</div>
+                                        <div class="col-xs-1 bold_head" align="right"> अनुक्रमांक / Roll No:</div>
+                                        <div class="col-xs-2 normal_head">MOCK00001</div>
+
+                                        <div class="col-xs-1 bold_head" align="right">लिंग / Gender:</div>
+                                        <div class="col-xs-2 normal_head">Male</div>
+
+                                        <div class="col-xs-1 bold_head" align="right">दिनांक / Date:</div>
+                                        <div class="col-xs-2 normal_head" id="showCurrentDate5"></div>
+                                    </div>
+
+                                </div>
+
+                                <div class="panel panel-primary">
+                                    <div class="panel-heading"><center>प्रश्न पत्र निर्देश / Question Paper Instruction</center></div>
+                                    <div class="panel-body">
+                                        <div id="instructionId" style=" height: 250px;overflow: auto;">
+                                            <div class="panel panel-info">
+                                                <div class="panel-heading text-center">
+                                                    प्रवेश परीक्षा हेतु निर्देश<br />
+                                                    Common Entrance Test Examination Instructions
+                                                </div>
+                                                <div class="panel-body">
+                                                    <div id="firstInst">
+                                                        <h4 style="font-size:15px;">
+                                                            <u>
+                                                                कृपया निम्नलिखित निर्देशों को ध्यान से पढ़ें।<br />
+                                                                Please read the following instructions carefully
+                                                            </u>
+                                                        </h4>
+                                                        <p><strong><u>परीक्षा के दौरान सामान्य निर्देश।  <br />General Instructions during Examination</u></strong></p>
+
+
+                                                        <div>
+                                                            <ol>
+                                                                <li>
+                                                                    सभी प्रश्नों को हल करने के लिए आपको कुल120 मिनट का समय दिया जाएगा।<br />
+                                                                    Total duration of 120 minutes will be given to attempt all the questions.
+                                                                    <br><br />
+                                                                </li>
+
+                                                                <li>
+                                                                    सर्वर पर घड़ी लगाई गई है तथा आपकी स्क्रीन के दाहिने कोने में शीर्ष पर काउंटडाउन टाइमर आपके परीक्षा समाप्त होने के शेष समय को प्रदर्शित करता है । परीक्षा समय समाप्त होने पर, आपको अपनी परीक्षा बंद या जमा करने की जरूरत नहीं है । यह स्वतः बंद या जमा हो जाएगी।<br />
+                                                                    The clock has been set at the server on start of test and the countdown timer at the top right corner of your screen will display the time remaining for you to complete the examination. When the clock runs out, the exam ends automatically. You are not required to end or submit your examination.
+                                                                    &nbsp;<br>
+                                                                    <br>
+                                                                </li>
+
+                                                                <li>
+                                                                    स्क्रीन के दाहिने कोने में प्रश्न पट्टिका पर दिए गए नंबर प्रत्येक प्रश्न के लिए निम्न में से कोई एक स्थिति प्रकट करती है :<br />
+                                                                    The question palette at the right of screen shows one of the following statuses of each of the questions numbered:
+
+                                                                </li>
+                                                            </ol>
+                                                        </div>
+
+                                                        <p style="margin-left:.5in">&nbsp;</p>
+
+                                                        <div class="button_wrap-2">
+                                                            <table class="table" border="1px">
+                                                                <tr><td><a class="btn btn-circle btn-default" id="notViewedAns">10</a> </td><td>अभी तक आपने कुल इतने प्रश्नों को नहीं पढ़ा है |</td><td> Total of Questions to be answered. </td></tr>
+                                                                <tr><td><a class="btn btn-circle btn-success" id="answeredAns">0</a></td><td>कुल इतने प्रश्नों का उत्तर दे दिया है</td><td> Total Questions answered.</td></tr>
+                                                                <tr><td><a class="btn btn-circle btn-danger" id="unansweredAns">0</a></td><td>कुल इतने प्रश्नों को आप पढ़ चुके है परन्तु उत्तर नहीं दिया है</td><td>Total of questions read out but unanswered.</td></tr>
+                                                                <tr><td><a class="btn btn-circle btn-warning" id="answeredAndMarkedAns">0</a></td><td>कुल इतने प्रश्नों का उत्तर दे चुके है लेकिन पुनर्विचार / समीक्षा के लिए चिन्हित किया हुआ है</td><td>Total of answered the questions but marked it for review.</td></tr>
+                                                            </table>
+                                                        </div>
+                                                        <p>
+                                                            <b>Note:</b>पुनर्विचार / समीक्षा के लिए चिन्हित स्थिति सामान्यत: अनुस्मारक के रूप में कार्य करती है जो कि आपने प्रश्न को दुबारा देखने के लिए सेट किया है।<br />
+                                                            The Marked for Review status simply acts as a reminder that you have set to look at the question again.
+                                                        </p>
+                                                        <p class="hide">
+                                                            <b>4.</b>  पुनर्विचार / समीक्षा के लिए चिन्हित स्थिति सामान्यत: अनुस्मारक के रूप में कार्य करती है जो कि आपने प्रश्न को दुबारा देखने के लिए सेट किया है।<br />
+                                                            The Marked for Review status simply acts as a reminder that you have set to look at the question again.
+                                                        </p>
+                                                        <h4>
+                                                            <u>
+                                                                किसी प्रश्न पर जाना <br />
+                                                                Navigating to a question :
+                                                            </u>
+                                                        </h4>
+                                                        <p>
+                                                            उत्तर देने हेतु कोई प्रश्न चुनने के लिए, आप निम्न में से कोई एक कार्य कर सकते हैं : <br />
+                                                            To select a question to answer, you can do one of the following:
+                                                        </p>
+                                                        <ul>
+                                                            <li>
+                                                                स्क्रीन के दांयी ओर प्रश्न पट्टिका में प्रश्न पर सीधे जाने के लिए प्रश्न संख्या पर क्लिक करें। ध्यान दें कि इस विकल्प का प्रयोग करने से मौजूदा प्रश्न के लिए आपका उत्तर सुरक्षित नहीं होता है।<br />
+                                                                Click on the question number on the question palette at the right of your screen to go to that numbered question directly. Note that using this option does NOT save your answer to the current question.
+                                                            </li>
+                                                            <li>
+                                                                वर्तमान प्रश्न का उत्तर सुरक्षित करने के लिए और क्रम में अगले प्रश्न पर जाने के लिए "सुरक्षित और अगला" पर क्लिक करें।<br />
+                                                                Click on Save and Next to save answer to current question and to go to the next question in sequence.
+                                                                <br /><br />
+                                                            </li>
+                                                            <li>
+                                                                वर्तमान प्रश्न का उत्तर सुरक्षित करने के लिए और पुनर्विचार के लिए चिन्हित करने तथा क्रम में अगले प्रश्न पर जाने के लिए "पुनर्विचार के लिए चिन्हित" क्लिक करें तदोपरांत "सुरक्षित और अगला" पर क्लिक करें।<br />
+                                                                If you want to review the answer of any question later Click on Mark for Review check box and then Click on “Save and Next” Button to save answer of current question go to the next question in sequence.
+
+                                                            </li>
+                                                        </ul>
+                                                        <p>
+                                                            <br />
+                                                        </p>
+                                                        <p>
+                                                            <strong>
+                                                                वर्तमान प्रश्न का उत्तर सुरक्षित करने के लिए और पुनर्विचार के लिए चिन्हित करने तथा क्रम में अगले प्रश्न पर जाने के लिए "पुनर्विचार के लिए चिन्हित" क्लिक करें तदोपरांत "सुरक्षित और अगला" पर क्लिक करें।<br />
+                                                                If you want to review the answer of any question later Click on Mark for Review check box and then Click on “Save and Next” Button to save answer of current question go to the next question in sequence.
+                                                            </strong>
+                                                        </p>
+                                                        <p>
+                                                            <b>5. </b>आप प्रश्न-पत्र बटन पर क्लिक करके संपूर्ण प्रश्नपत्र को देख सकते हैं, और वापसी के लिए "क्लोज बटन" पर क्लिक करें।<br />
+                                                            You can view the entire question paper by clicking on the “Question Paper” button and click on “Close” to return.
+
+                                                        </p>
+                                                        <p class="hide">
+                                                            <b>7. </b>તમે પ્રશ્નપત્ર (Question Paper) બટન પર ક્લીક કરી સંપૂર્ણ પ્રશ્નપત્ર જોઇ શકો છો. <br />
+                                                            &nbsp;&nbsp;&nbsp;You can view the entire paper by clicking on the “Question Paper” button and click on “Close” to return.
+                                                        </p>
+                                                        <p class="">
+                                                            <b>6. </b>अल्प विराम: छोटी राहत अधिकतम 5 मिनट की होगी। वास्तविक समय परीक्षा में आपकी स्क्रीन लॉक हो जाएगी और केवल आप रिटर्न पर खुल सकते हैं। लघु राहत में लिया गया समय सिस्टम में और साथ ही अन्वेषक द्वारा दर्ज किया जाएगा।<br />
+                                                            Short Relief : The short relief will be of maximum 5 minutes each. In real time examination your screen will locked and only you can open on return. The time taken in short relief will be recorded in system as well as by Invigilator.
+                                                        </p>
+                                                        <h4>
+                                                            <u>
+                                                                प्रश्नों का उत्तर देना :<br />
+                                                                Method of Answering the questions :
+                                                            </u>
+                                                        </h4>
+                                                        <p>
+                                                            <b>7. </b>	बहु विकल्पी प्रश्न के लिए :<br />
+                                                            For multiple choice type question :
+                                                        </p>
+                                                        <ul>
+                                                            <li>
+                                                                अपना उत्तर चुनने के लिए, विकल्प बटनों में से किसी एक पर क्लिक करें।<br />
+                                                                To select your answer, click on one of the option buttons
+                                                            </li>
+                                                            <li>
+                                                                अपना उत्तर बदलने के लिए, अन्य वांछित विकल्प बटन पर क्लिक करें।<br />
+                                                                To change your answer, click the another desired option button
+                                                            </li>
+                                                            <li>
+                                                                अपना उत्तर सुरक्षित करने के लिए, आपको “सुरक्षित और अगला” बटन पर क्लिक करें।<br />
+                                                                To save your answer, you MUST click on “Save & Next”
+                                                            </li>
+                                                            <li>
+                                                                चयनित उत्तर को अचयनित करने के लिए, “खाली करें” बटन पर क्लिक करें।<br />
+                                                                To deselect a chosen answer, click on the “Clear” button.
+                                                            </li>
+                                                            <li>
+                                                                किसी प्रश्न को पुनर्विचार के लिए चिन्हित करने हेतु, पुनर्विचार पर क्लिक करें तदोपरांत “सुरक्षित और अगला” अथवा “सुरक्षित और पिछला” पर क्लिक करें।<br />
+                                                                To mark a question for review Click on mark for review & there after click on “Save & Next” or “Save & Previous”.
+                                                            </li>
+                                                        </ul>
+                                                        <p><br /></p>
+                                                        <p>
+                                                            <b>8. </b>	किसी प्रश्न का उत्तर बदलने के लिए, पहले प्रश्न का चयन करें, फिर नए उत्तर विकल्प पर क्लिक करने के बाद “सुरक्षित और अगला” बटन पर क्लिक करें।<br />
+                                                            To change an answer to a question, first select the question and then click on the new answer option followed by a click on the “Save & Next” button.
+                                                        </p>
+                                                        <!--<p>
+                                                            <strong><u>परीक्षा के दौरान सामान्य निर्देश। | </u></strong><br>
+                                                            <strong><u>General Instructions during Examination </u></strong>
+                                                        </p>-->
+
+                                                        <h4>
+                                                            अन्य महत्वपूर्ण निर्देश :<br />
+                                                            Other Important Instructions:
+
+                                                        </h4>
+                                                        <ol>
+                                                            <li>
+                                                                प्रवेश पत्र में दिए गए निर्देशों को ध्यानपूर्वक पढ़ें।<br />
+                                                                Read the Instructions given in Admit Card carefully.
+                                                            </li>
+                                                            <li>
+                                                                ऑनलाइन परीक्षा के पहले या दौरान दिए गए निर्देशों का पालन करें।<br />
+                                                                Follow the instruction given before or during online examination in examination Hall.
+                                                            </li>
+                                                            <li>
+                                                                सेल फोन, पेजर्स, कैलकुलेटर, पेन ड्राइव, टेबलेट या किसी भी इलेक्ट्रॉनिक डिवाइस का उपयोग वर्जित है । उल्लंघन करने पर परीक्षा से निकाला जा सकता है। परीक्षा केंद्र में उनके रखने के लिए कोई व्यवस्था नहीं की गई है।<br />
+                                                                Cell phones, pagers, calculators, Pen Drives, Tablets or any electronic devices are strictly prohibited. Violation may lead to expulsion from the examination. No arrangements have been made at the centers for their custody
+                                                            </li>
+                                                            <li>
+                                                                अनुचित आचरण परीक्षा से निष्कासन का कारण होगा। निर्देशों का अनुपालन करने में विफलता परीक्षा से निष्कासन / उम्मीदवारी का रद्द होना या अन्य उचित कानूनी कार्रवाई का कारण हो सकता है।<br />
+                                                                Improper conduct will entail expulsion from the examination. Failure to comply with the instructions will entail expulsion/ cancellation of candidature or appropriate legal action.
+                                                            </li>
+                                                            <li>
+                                                                ऑनलाइन परीक्षा के दौरान किसी भी स्क्रीन के पहले या बाद दिए गए निर्देशों का पालन करें।<br />
+                                                                Follow the instruction given before or after any screen during online exam.
+                                                            </li>
+                                                            <li>
+                                                                परीक्षा के दौरान कंप्यूटर की बोर्ड का उपयोग सख्त वर्जित है। जहां भी कंप्यूटर की बोर्ड का उपयोग करना आवश्यक है, वर्चुअल कीबोर्ड स्क्रीन पर स्वचालित रूप से दिखाई देगा।<br />
+                                                                Use of keyboard during the exam is strictly prohibited. Wherever use of keyboard is needed a virtual keyboard will appear on screen automatically.
+                                                            </li>
+                                                            <li>
+                                                                परीक्षा प्रक्रिया के दौरान हमेशा शांति, अनुशासन और मौन बनाए रखें।<br />
+                                                                Always maintain peace, discipline and silence during the examination process.
+                                                            </li>
+                                                            <li>
+                                                                परीक्षा पूरी होने से पहले परीक्षा कक्ष से बाहर नहीं जा सकते है।<br />
+                                                                Cannot leave Examination before completion of examination.
+                                                            </li>
+                                                            <li>
+                                                                देवी अहिल्या विश्वविद्यालय, इंदौर, प्रत्येक उम्मीदवार की पहचान और वास्तविकता को सत्यापित करने तथा अन्य सभी अधिकार सुरक्षित रखता है<br />
+                                                                JUST A MOCK PAPER, Indore, reserves all rights including right to verify identity and genuineness of each candidate.
+                                                            </li>
+                                                        </ol>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="modal-footer" style="padding-top: 1px;padding-bottom: 1px;">
+                                    <button type="button" class="btn btn-green" data-dismiss="modal" style="margin-top: 10px;">Close</button>
+                                    <!--    <button type="button" class="btn btn-primary">OK </button> -->
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+        </div>
+
+        </form>
+    </div>
+
+    <!-- Modal start -->
+    <div id="summaryModel" class="modal fade">
+        <div class="modal-dialog modal-lg margin-top" style=" width:85%;">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                    <h4 class="modal-title"><label style="color:#fff;"> JUST A MOCK PAPER</label></h4>
+                </div>
+                <div class="modal-body">
+
+                    <div class="panel panel-default" style="margin-bottom: 5px;">
+
+                        <div class="panel-body modal_head_part">
+
+                            <div class="col-xs-1"><img alt="" class="logo img-circle" src="Images/logo-icon.jpg"></div>
+                            <div class="col-xs-2 bold_head">Mock Student </div>
+                            <div class="col-xs-1 bold_head" align="right">अनुक्रमांक / Roll No:</div>
+                            <div class="col-xs-2 normal_head">MOCK00001</div>
+
+                            <div class="col-xs-1 bold_head" align="right">लिंग / Gender: </div>
+                            <div class="col-xs-2 normal_head">Male</div>
+
+                            <div class="col-xs-1 bold_head" align="right">दिनांक / Date:  </div>
+                            <div class="col-xs-2 normal_head" id="showCurrentDate6"></div>
+
+                        </div>
+
+                    </div>
+
+                    <div class="panel panel-primary">
+                        <div class="panel-heading"><center> उत्तर सारांश /  Answer Summary </center></div>
+                        <div class="panel-body">
+                            <table class="table table-bordered summary_tab" id="summaryTable" name="summaryTable">
+                                <thead>
+                                    <tr>
+                                        <td style="background-color: #808080; color: #fff; width:80px;"><b>विभाग / Sections</b></td>
+                                        <td style="background-color: #808080; color: #fff;"><b><span class="inline_hindi_font"> प्रश्नों की कुल संख्या</span> / Total No. of Questions</b></td>
+                                        <td style="background-color: #fff ;"><b><span class="inline_hindi_font"> प्रश्नों के उत्तर दिए जाने है</span> / Questions to be answered</b></td>
+                                        <td style="background-color: #5cb85c; color: #fff;"><b><span class="inline_hindi_font"> उत्तर दिया</span> / Answered</b></td>
+                                        <td style="background-color: #d43f3a; color: #fff;"><b><span class="inline_hindi_font">उत्तर नहीं दिया</span> / Unanswered</b></td>
+                                        <td style="background-color: #ec971f; color: #fff;"><b><span class="inline_hindi_font">उत्तर दिया और पुनर्विचार के लिए चिह्नित किया</span> / Answered &amp; Marked For Review</b></td>
+                                    </tr>
+                                </thead>
+
+                                <tbody id="summaryBody" align="center"></tbody>
+                                <!-- <tfoot id="">
+                                    <tr>
+                                        <td style="background-color: #C7C7C7;"><b>Total</b></td>
+                                    </tr>
+                                </tfoot> -->
+                            </table>
+                        </div>
+
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-green" data-dismiss="modal"> बंद करे / Close</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal start -->
+    <div id="paperModel" class="modal fade">
+        <div class="modal-dialog modal-lg margin-top" style="width:73%;">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                    <h4 class="modal-title"><label style="color:#fff;">  JUST A MOCK PAPER </label></h4>
+                </div>
+
+                <div class="modal-body" style="padding: 7px;">
+                    <div class="panel panel-default" style="margin-bottom: 5px;">
+                        <div class="panel-body modal_head_part">
+                            <div class="col-xs-1"><img alt="" class="logo img-circle" src="Images/logo-icon.jpg"></div>
+                            <div class="col-xs-2 bold_head">Mock Student</div>
+                            <div class="col-xs-1 bold_head" align="right">अनुक्रमांक / Roll No:</div>
+                            <div class="col-xs-2 normal_head">MOCK00001</div>
+
+                            <div class="col-xs-1 bold_head" align="right">लिंग / Gender:</div>
+                            <div class="col-xs-2 normal_head">Male</div>
+
+                            <div class="col-xs-1 bold_head" align="right">दिनांक / Date:</div>
+                            <div class="col-xs-2 normal_head" id="showCurrentDate7"></div>
+
+                        </div>
+                    </div>
+
+                    <div class="panel panel-primary" style="margin-bottom: 0;">
+                        <div class="panel-heading"><center>प्रश्न पत्र / Question Paper</center></div>
+                        <div class="panel-body" style="padding-top:0px;">
+                            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" style=" height: 350px; overflow: auto;">
+                                <table id="paperId" style="width:100%;">
+                                    <tbody id="tbodyQuestion"></tbody>
+                                </table>
+
+                            </div>
+                        </div>
+                        <div class="modal-footer" style="padding-top: 1px;padding-bottom: 1px;">
+                            <button type="button" class="btn btn-green" data-dismiss="modal" style="margin-top: 6px;"> बंद करे / Close</button>
+                            <!--    <button type="button" class="btn btn-primary">OK </button> -->
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- model end -->
+    <!--  model  start-->
+    <form>
+        <div id="profileModal" class="modal fade">
+            <div class="modal-dialog modal-lg margin-top" style="width:73%;">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                        <h4 class="modal-title"><label style="color:#fff;"> JUST A MOCK PAPER </label></h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="panel panel-default" style="margin-bottom: 5px;">
+                            <div class="panel-body modal_head_part">
+                                <div class="col-xs-1"><img alt="" class="logo img-circle" src="Images/logo-icon.jpg"></div>
+                                <div class="col-xs-2 bold_head">Mock Student</div>
+                                <div class="col-xs-1 bold_head" align="right">अनुक्रमांक / Roll No:</div>
+                                <div class="col-xs-2 normal_head">MOCK00001</div>
+                                <div class="col-xs-1 bold_head" align="right">लिंग / Gender:</div>
+                                <div class="col-xs-2 normal_head">Male</div>
+                                <div class="col-xs-1 bold_head" align="right">दिनांक / Date:</div>
+                                <div class="col-xs-2 normal_head" id="showCurrentDate"></div>
+                            </div>
+                        </div>
+
+                        <div class="panel panel-primary">
+                            <div class="panel-heading"><center> उम्मीदवार का प्रोफ़ाइल / Candidate Profile</center></div>
+
+                            <div class="panel-body" style="padding: 0px;">
+
+                                <div id="profileId" class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+
+                                    <fieldset class="fsStyle">
+                                        <legend class="legendStyle">उम्मीदवार का विवरण / Candidate Details</legend>
+                                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                                            <div class="col-xs-12 col-sm-9 col-md-9 col-lg-9 examine_detail">
+                                                <div class="row">
+                                                    <div class="form-group">
+                                                        <div class="col-xs-5"><label class="bld_txt"><span class="h_hindi">उम्मीदवार का नाम </span> / Name Of Candidate :</label></div>
+                                                        <div class="col-xs-5"><label id="nameOfExaminee">Mock Student</label></div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="row">
+                                                    <div class="form-group">
+                                                        <div class="col-xs-5"><label class="bld_txt"><span class="h_hindi">अनुक्रमांक </span> / Roll Number :</label></div>
+                                                        <div class="col-xs-5"><label id="rollNumber">MOCK00001</label></div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="row">
+                                                    <div class="form-group">
+                                                        <div class="col-xs-5"><label class="bld_txt"><span class="h_hindi">पुष्टिकरण संख्या </span> / Confirmation Number:</label></div>
+                                                        <div class="col-xs-5"><label id="regNo">10001</label></div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="row">
+                                                    <div class="form-group">
+                                                        <div class="col-xs-5"><label class="bld_txt"><span class="h_hindi">ईमेल आईडी</span> / Email ID :</label></div>
+                                                        <div class="col-xs-5"><label id="emailId">xyz@gmail.com</label></div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="row">
+                                                    <div class="form-group">
+                                                        <div class="col-xs-5"><label class="bld_txt"><span class="h_hindi">मोबाइल नंबर </span> / Mobile Number:</label></div>
+                                                        <div class="col-xs-5"><label id="mobileNo">**********</label></div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="row">
+                                                    <div class="form-group">
+                                                        <div class="col-xs-5"><label class="bld_txt"><span class="h_hindi">लिंग</span> / Gender :</label></div>
+                                                        <div class="col-xs-5"><label id="gender">Male</label></div>
+                                                    </div>
+                                                </div>
+
+
+                                                <div class="row">
+                                                    <div class="form-group">
+                                                        <div class="col-xs-5"><label class="bld_txt"><span class="h_hindi">जन्म की तारीख</span> / D.O.B. :</label></div>
+                                                        <div class="col-xs-5"><label id="candidateDOB">26/10/1988</label></div>
+                                                    </div>
+                                                </div>
+
+
+                                                <div class="row">
+                                                    <div class="form-group">
+                                                        <div class="col-xs-5"><label class="bld_txt"><span class="h_hindi">वर्ग</span> / Category :</label></div>
+                                                        <div class="col-xs-5"><label id="category">Neither of these</label></div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="row">
+                                                    <div class="form-group">
+                                                        <div class="col-xs-5"><label class="bld_txt"><span class="h_hindi">भाषा</span> / Language :</label></div>
+                                                        <div class="col-xs-5"><input id="title" name="langu" type="text" class="form-control span2" value="English" readonly="readonly" size="15px;"></div>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+
+                                            <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+                                                <img src="Images/pic.jpg" style="width:180px; height: 180px;" />
+                                            </div>
+
+                                            <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+                                                <img id="img" class="img-thumbnail" src="Images/signature-logo.png" style="width:180px; margin-top:5px;">
+                                            </div>
+
+                                        </div>
+
+                                    </fieldset>
+
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-green" data-dismiss="modal">बंद करे / Close</button>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </form>
+    <!-- model end -->
+    <form action="logout" method="post" id="logoutForm">
+
+
+        <input type="hidden" name="_csrf" value="93c41d5e-c54a-4b80-b2ee-5e30b0f9eca0">
+    </form>
+
+    <script type="text/javascript">
+        function bioCallSubmit() {
+            $.ajax({
+                type: "get",
+                url: "eontdmUpdateIsLogin",
+                cache: false,
+                success: function (response) {
+                    if (response == 1) {
+                        document.getElementById("logoutForm").submit();
+                    }
+                },
+                error: function () {
+                    $.alert.open('Error while loading Master Data');
+                }
+            });
+
+        }
+
+    </script>
+
+    <!-- **********************************************************************    -->
+    <div id="BioCallModal" class="modal fade">
+        <div class="modal-dialog modal-lg margin-top" style="width:73%;">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                    <h4 class="modal-title"><label style="color:#fff;">  JUST A MOCK PAPER</label></h4>
+                </div>
+                <div class="modal-body">
+
+                    <div class="panel panel-default" style="margin-bottom: 5px;">
+
+                        <div class="panel-body modal_head_part">
+
+                            <div class="col-xs-1"><!-- <img alt="" class="logo img-circle" src="Images/logo-icon.jpg"> --></div>
+                            <div class="col-xs-2 bold_head">Mock Student</div>
+                            <div class="col-xs-1 bold_head" align="right">अनुक्रमांक / Roll No:</div>
+                            <div class="col-xs-2 normal_head">MOCK00001</div>
+
+                            <div class="col-xs-1 bold_head" align="right">लिंग / Gender:</div>
+                            <div class="col-xs-2 normal_head">Male</div>
+
+                            <div class="col-xs-1 bold_head" align="right">दिनांक / Date:</div>
+                            <div class="col-xs-2 normal_head" id="showCurrentDate2"></div>
+
+                        </div>
+
+                    </div>
+
+                    <div class="panel panel-primary">
+
+                        <div class="panel-heading"><center>अल्प विराम / Short Relief</center></div>
+
+                        <div class="panel-body">
+
+                            <div id="bioCall" class="col-xs-12 col-sm-12 col-md-12 col-lg-12" style=" height: 200px;">
+
+                                <div class="col-xs-12">
+                                    <!-- <img alt="" class="img-circle" src="Images/alert.jpg" style="width: 50px;height: 50px;"> -->
+                                    <label style="color: red; font-weight: bold;">
+                                        छोटी राहत अधिकतम 5 मिनट की होगी। वास्तविक समय की परीक्षा में आपकी स्क्रीन लॉक हो जाएगी और केवल आप रिटर्न पर खोल सकते हैं। कम राहत में लगने वाला समय सिस्टम के साथ-साथ इनविजिलेटर द्वारा भी दर्ज किया जाएगा।
+                                        <br><br>The short relief will be of maximum 5 minutes each. In real time examination your screen will locked and only you can open on return. The time taken in short relief will be recorded in system as well as by Invigilator.
+                                    </label>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="modal-footer" style="padding-top: 1px; padding-bottom: 1px; margin-top: 10px;">
+                            <br>
+                            <button type="button" class="btn btn-green" data-dismiss="modal">Cancel</button>
+                            <button type="button" class="btn btn-green" data-dismiss="modal" disabled="true" onclick="">OK</button>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- **********************************************************************    -->
+
+    <div id="submitModal" class="modal fade">
+        <div class="modal-dialog modal-lg" style="width: 84%; margin-top: 51px;">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                    <h4 class="modal-title"><label style="color:#fff;"> JUST A MOCK PAPER</label></h4>
+                </div>
+
+                <div class="modal-body" style="padding-bottom: 0px;">
+
+                    <div class="panel panel-default" style="margin-bottom: 5px;">
+
+                        <div class="panel-body modal_head_part">
+                            <div class="col-xs-1"><img alt="" class="logo img-circle" src="Images/logo-icon.jpg"></div>
+                            <div class="col-xs-2 bold_head">Mock Student</div>
+                            <div class="col-xs-1 bold_head" align="right">अनुक्रमांक / Roll No:</div>
+                            <div class="col-xs-2 normal_head">MOCK00001</div>
+
+                            <div class="col-xs-1 bold_head" align="right">लिंग / Gender:</div>
+                            <div class="col-xs-2 normal_head">Male</div>
+
+                            <div class="col-xs-1 bold_head" align="right">दिनांक / Date:</div>
+                            <div class="col-xs-2 normal_head" id="showCurrentDate3"></div>
+
+                        </div>
+
+                    </div>
+
+                    <div class="panel panel-primary">
+                        <div class="panel-heading">
+                            <center>
+                                परीक्षा सारांश / Exam Summary
+                            </center>
+                        </div>
+
+                        <div class="panel-body" style="padding-bottom: 0px;">
+                            <div id="submit" class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+
+                                <div style="height: 160px; overflow: auto;">
+                                    <table class="table table-bordered ans_pap_tab" id="submitSummaryTable" name="submitSummaryTable">
+                                        <thead>
+                                            <tr>
+                                                <td style="background-color: #808080; color: #fff; width:80px;"><b>विभाग / Sections</b></td>
+                                                <td style="background-color: #808080; color: #fff;"><b><span class="inline_hindi_font">  प्रश्नों की कुल संख्या</span> / Total No. of Questions</b></td>
+                                                <td style="background-color: #fff ;"><b><span class="inline_hindi_font">प्रश्नों के उत्तर दिए जाने है</span> / Questions to be answered</b></td>
+                                                <td style="background-color: #5cb85c; color: #fff;"><b><span class="inline_hindi_font">उत्तर दिया</span> / Answered</b></td>
+                                                <td style="background-color: #d43f3a; color: #fff;"><b><span class="inline_hindi_font">उत्तर नहीं दिया</span> / Unanswered</b></td>
+
+                                                <td style="background-color: #ec971f; color: #fff;"><b><span class="inline_hindi_font">उत्तर दिया और पुनर्विचार के लिए चिह्नित किया</span> / Answered &amp; Marked For Review</b></td>
+                                            </tr>
+                                        </thead>
+
+                                        <tbody id="submitSummaryBody" align="center"></tbody>
+                                        <!-- <tfoot id="">
+                                            <tr>
+                                                <td style="background-color: #C7C7C7;"><b>Total</b></td>
+                                            </tr>
+
+                                        </tfoot> -->
+                                    </table>
+                                </div>
+                            </div>
+
+                            <div class="col-xs-12" align="center">
+                                <div class="col-xs-12 text-center">
+                                    <div style="width:92%; margin:0 auto;">
+                                        <!-- <img alt="" class="img-rounded" src="Images/alert.jpg" style="width: 80px;height: 80px;"> -->
+                                        <lable style="color: blue; font-weight: bold; width:100%; display:inline-block; margin-bottom:12px;">
+                                            सबमिट किए जाने पर आपका सत्र बंद हो जाएगा और आपको इस परीक्षा को दोबारा लेने की अनुमति नहीं दी जाएगी। आपके पास <label id="timeleftHindi" style="font-size: 20px;color:red;"></label>  मिनट बचे हैं, जिसके बाद इसे ऑटो सबमिट किया जाएगा। क्या आप सुनिश्चित हैं कि आप समय पूरा होने से पहले जमा करना चाहते हैं।
+                                            <label style="color: blue; font-weight: bold; width:100%; display:inline-block;">Your session will be closed when submitted and you will not be allowed to retake this examination.<br>You have left <label id="timeleft" style="font-size: 20px;color:red;"></label> minute, after which it will be auto submitted.<br>Are you sure you want to submit before the time completion?</label>
+                                    </div>
+                                </div>
+                                <!-- <div class="col-xs-11">
+                                    <label style="color: red; font-weight: bold;">Your session will be closed when submitted and you will not be allowed to retake this examination.<br>You have left after which it will be auto submitted.Are you sure you want to submit before it?</label>
+                                </div> -->
+                            </div>
+
+                        </div>
+
+                        <div class="modal-footer" style="padding-top: 1px;padding-bottom: 1px;">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">रद्द करना / Cancel</button>
+                            <!--  <a href="feedbacksuccess.html" class="btn btn-default" >Submit</a>  -->
+                            <a href="#" onclick="showSummaryDetails('resultSummary'), showResult()" class="btn btn-success">मॉक जमा करें/ Submit Mock</a>
+
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal HTML -->
+    <div id="timeLeftPopup" class="modal fade">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header btn-info">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                    <center><h4 class="modal-title">समय अनुस्मारक / Time Reminder</h4></center>
+                </div>
+                <div class="modal-body">
+                    <label style=" font-weight: bold;">प्रिय उम्मीदवार / Dear Candidate,<br> You have left with <label id="popUptimeleft" style="font-size: 20px;color:red;"></label> minute, after which it will be auto submitted.<br>Please do review your answers before examination time ends?</label>
+                </div>
+                <div class="modal-footer" align="center">
+                    <center><button type="button" class="btn btn-info" data-dismiss="modal" style="padding-right: 25px;padding-left: 25px;font-family: bold;">OK</button></center>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <form action="logout?mode=3" method="post" id="logoutPaperSubmitForm">
+        <input type="hidden" name="_csrf" value="93c41d5e-c54a-4b80-b2ee-5e30b0f9eca0">
+    </form>
+
+    <!-- *******************************END OF MODAL***************************************       -->
+    </div>
+    <div class="div-2" id="resultDiv" style="display:none">
+        <div id="resultModel" class="">
+            <div class="modal-dialog modal-lg" style=" width:100%; margin-top:0px;">
+                <div class="modal-content" style="position:fixed !important; top:0 !important; bottom:0 !important; min-height:970px !important; border-radius:0px !important;width:100%">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                        <h4 class="modal-title"><label style="color:#fff; text-align:center !important;"> मॉक टेस्ट परिणाम / Mock Test Result</label></h4>
+                    </div>
+                    <div class="modal-body">
+
+                        <div class="panel panel-default" style="margin-bottom: 5px;">
+
+                            <div class="panel-body modal_head_part">
+
+                                <div class="col-xs-1"><img alt="" class="logo img-circle" src="Images/logo-icon.jpg"></div>
+                                <div class="col-xs-2 bold_head">Mock Student </div>
+                                <div class="col-xs-1 bold_head" align="right">अनुक्रमांक / Roll No:</div>
+                                <div class="col-xs-2 normal_head">MOCK00001</div>
+
+                                <div class="col-xs-1 bold_head" align="right">लिंग / Gender: </div>
+                                <div class="col-xs-2 normal_head">Male</div>
+
+                                <div class="col-xs-1 bold_head" align="right">दिनांक / Date:  </div>
+                                <div class="col-xs-2 normal_head" id="showCurrentDate9"></div>
+
+                            </div>
+
+                        </div>
+
+                        <div class="panel panel-primary">
+                            <div class="panel-heading"><center>उत्तर सारांश /  Answer Summary </center></div>
+                            <div class="panel-body">
+                                <table class="table table-bordered summary_tab" name="summaryTable">
+                                    <thead>
+                                        <tr>
+                                            <td style="background-color: #808080; color: #fff; width:80px;"><b>विभाग/ Sections</b></td>
+                                            <td style="background-color: #808080; color: #fff;"><b><span class="inline_hindi_font">प्रश्नों की कुल संख्या</span> / Total No. of Questions</b></td>
+                                            <td style="background-color: #fff ;"><b><span class="inline_hindi_font">प्रश्नों के उत्तर दिए जाने है</span> / Questions to be answered</b></td>
+                                            <td style="background-color: #5cb85c; color: #fff;"><b><span class="inline_hindi_font">उत्तर दिया</span> / Answered</b></td>
+                                            <td style="background-color: #d43f3a; color: #fff;"><b><span class="inline_hindi_font">उत्तर नहीं दिया</span> / Unanswered</b></td>
+                                            <!--<td style="background-color: #337ab7; color: #fff;"><b><span class="inline_hindi_font">उत्तर नहीं दिया और समीक्षा के लिए चिह्नित किया</span> / Unanswered &amp; Marked For Review</b></td>-->
+                                            <td style="background-color: #ec971f; color: #fff;"><b><span class="inline_hindi_font">उत्तर दिया और पुनर्विचार के लिए चिह्नित किया</span> / Answered &amp; Marked For Review</b></td>
+                                            <td style="background-color: #5bc0de; color: #fff;"><b><span class="inline_hindi_font">सही उत्तर </span> / Correct Answers</b></td>
+                                        </tr>
+                                    </thead>
+
+                                    <tbody id="resultSummaryBody" align="center"></tbody>
+                                    <!-- <tfoot id="">
+                                        <tr>
+                                            <td style="background-color: #C7C7C7;"><b>Total</b></td>
+                                        </tr>
+                                    </tfoot> -->
+                                </table>
+                            </div>
+
+                            <div class="modal-footer">
+                                <button id="btnProceedEngine" class="btn btn-green">
+                                    मॉक जमा करें / Submit Mock
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="footer" style="height: 20px;">
+        <div class="col-xs-12 col-md-12 text-center" style="padding:0px;">
+            <p class="text-foot" align="center">ऑनलाइन परीक्षा सेल / Online Examination Cell</p>
+        </div>
+    </footer>
+
+    <!-- <script src="js/ie-emulation-modes-warning.js"></script> -->
+    <script src="js/jquery.js"></script>
+    <script src="js/test/bootstrap.min.js"></script>
+    <script src="js/jquery-ui.js"></script>
+
+    <script src="js/jqkeyboard.js"></script>
+    <script src="js/jqk.layout.en-bg.js"></script>
+    <script src="js/bootstrap-datepicker.js"></script>
+    <script src="js/alert.js"></script>
+    <script src="js/jquery.alerts.js"></script>
+    <script src="js/tdm/screenfull.js"></script>
+    <script>
+        $(document).ready(function () {
+            //$(document)[0].oncontextmenu = function() {return false;} //for right click disable
+            jqKeyboard.init({
+                containment: "#container",
+                icon: "dark",
+            });
+            jQuery(function () {
+                jQuery('#jqk-toggle-btn').click();
+            });
+            //  jqKeyboard.init();
+            // window.history.forward();
+            history.pushState(null, null, '');
+            window.addEventListener('popstate', function () {
+                history.pushState(null, null, '');
+            });
+
+        });
+        /* $(document).ready(function() {
+            function disableBack() { window.history.forward() }
+
+            window.onload = disableBack();
+            window.onpageshow = function(evt) { if (evt.persisted) disableBack() }
+        }); */
+        //close tab message
+
+        /* window.onbeforeunload = function (e) {
+            e = e || window.event;
+
+            // For IE and Firefox prior to version 4
+            if (e) {
+                e.returnValue = 'Are You Want To Close ..?';
+            }
+
+            // For Safari
+            return 'Are You Want To Close ..?';
+        }; */
+        /* function preventBack(){window.history.forward();}
+        setTimeout("preventBack()", 0);
+        window.onunload=function(){null}; */
+        /* function blockFullScreen()
+        {
+             alert("hi");
+             screenfull.request();
+        } */
+        /* $('#submitId').click(function () {
+            screenfull.request();
+        });  */
+    </script>
+
+
+    <script src="js/SimpleCalculadorajQuery.js"></script>
+    <script src="js/stopwatch.js"></script>
+    <script src="js/tdm/tdm.js"></script>
+    <script src="js/tdm/magnify.js"></script>
+    <script src="js/validation.js"></script>
+    <script src="js/blockPage.js"></script>
+    <script src="js/jquery.blockUI.js"></script>
+    <script src="js/bootstrap-tooltip.js"></script>
+
+
+
+    <script>
+        document.oncontextmenu = new Function("return false;");
+        $(document).ready(function () {
+            var today = new Date();
+            var dd = today.getDate();
+            var mm = today.getMonth() + 1; //January is 0!
+
+            var yyyy = today.getFullYear();
+            if (dd < 10) {
+                dd = '0' + dd;
+            }
+            if (mm < 10) {
+                mm = '0' + mm;
+            }
+            if (mm == "03") {
+                mm = "Mar";
+            } else if (mm == "04") {
+                mm = "Apr";
+            }
+            else if (mm == "05") {
+                mm = "May";
+            }
+            var today = dd + '-' + mm + '-' + yyyy;
+
+            //document.getElementById("DATE").value = today;
+            $("#showCurrentDate").html(today);
+            $("#showCurrentDate2").html(today);
+            $("#showCurrentDate3").html(today);
+            $("#showCurrentDate4").html(today);
+            $("#showCurrentDate5").html(today);
+            $("#showCurrentDate6").html(today);
+            $("#showCurrentDate7").html(today);
+            $("#showCurrentDate9").html(today);
+
+            //         $('#demo').calculator();
+            $("#micalc").Calculadora({ 'EtiquetaBorrar': 'Clear' });
+        });
+        /*  function viewQuestion(obj){
+             alert (obj.value);
+         } */
+
+        $(document).ready(function () {
+            //; debugger
+            $.alert.open('यह केवल आपके अभ्यास के लिए एक मॉक परीक्षा है।<br> This is a mock exam for your practice only.');
+            $("#tabId a").click(function (e) {
+                e.preventDefault();
+                $(this).tab('show');
+            });
+            //for radio & checkbox style
+            $('#btnProceedEngine').click(function () {
+                //; debugger
+                $.alert.open('आपने मॉक टेस्ट सफलतापूर्वक पूरा कर लिया है। आगामी स्क्रीन वास्तविक परीक्षा के हैं। हमारी ओर से आपको बहुत शुभकामनाएं। <br> You have successfully completed the mock test. Upcoming screens are of real examination. We wish you all the best. ');
+                window.location.href = "/Exam/Engine"
+            });
+        });
+
+    </script>
+
+</body>
+</html>
